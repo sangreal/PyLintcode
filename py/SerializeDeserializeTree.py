@@ -15,21 +15,19 @@ class Codec:
         :type root: TreeNode
         :rtype: str
         """
-        vec = collections.deque([root])
-        serialStr = ""
-
-        while len(vec) > 0:
-            curNode = vec.popleft()
-            if curNode == None:
-                serialStr += "null"
+        if root is None:
+            return ""
+        valist = []
+        def doit(node):
+            if node is None:
+                 valist.append('#')
             else:
-                serialStr += curNode.val
-                vec.append(curNode.left)
-                vec.append(curNode.right)
+                valist.append(str(node.val)) 
+                doit(node.left)
+                doit(node.right)
 
-        return serialStr
-
-
+        doit(root)
+        return ' '.join(valist)
 
 
     def deserialize(self, data):
@@ -39,13 +37,19 @@ class Codec:
         :rtype: TreeNode
         """
 
+        leng = len(data)
+        if leng == 0:
+            return None
 
-        for i in xrange(len(data)):
-            if data[i] == "null":
-                continue
+        vals = iter(data.split())
 
-            curNode = TreeNode(data[i])
-            lidx, ridx = 2*i+1, 2*i+2
-            if lidx < len(data):
-                if data[lidx] != "null":
-                    curNode.left =
+        def doit():
+            val = next(vals)
+            if val == '#':
+                return None
+            curNode = TreeNode(int(val)
+            curNode.left = doit()
+            curNode.right = doit()
+            return curNode
+        return doit()
+

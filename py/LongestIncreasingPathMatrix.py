@@ -1,17 +1,15 @@
 class Solution(object):
     def dfs(self, matrix, i, j, rowcount, colcount, stormap):
-        if i < 0 or j < 0 or i >= rowcount-1 or j >= colcount-1:
-            return 0
         if stormap[i][j] > 0:
-            return self.stormap[i][j]
+            return stormap[i][j]
 
-        if matrix[i][j] < matrix[i-1][j]:
+        if i > 0 and matrix[i][j] < matrix[i-1][j]:
             stormap[i][j] = max(stormap[i][j], self.dfs(matrix, i-1, j, rowcount, colcount, stormap))
-        if matrix[i][j] < matrix[i+1][j]:
+        if i < rowcount-1 and matrix[i][j] < matrix[i+1][j]:
             stormap[i][j] = max(stormap[i][j], self.dfs(matrix, i+1, j, rowcount, colcount, stormap))
-        if matrix[i][j] < matrix[i][j-1]:
+        if j > 0 and matrix[i][j] < matrix[i][j-1]:
             stormap[i][j] = max(stormap[i][j], self.dfs(matrix, i, j-1, rowcount, colcount, stormap))
-        if matrix[i][j] < matrix[i][j+1]:
+        if j < colcount - 1 and matrix[i][j] < matrix[i][j+1]:
             stormap[i][j] = max(stormap[i][j], self.dfs(matrix, i, j+1, rowcount, colcount, stormap))
 
         stormap[i][j] += 1
