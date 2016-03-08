@@ -41,5 +41,3 @@ class Solution(object):
             nextvec.clear()
         return 0 if found == False else level+1
 
-
-

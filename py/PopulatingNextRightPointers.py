@@ -1,12 +1,10 @@
-import collections
-
 # Definition for binary tree with next pointer.
-class TreeLinkNode(object):
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
-        self.next = None
+# class TreeLinkNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#         self.next = None
 
 class Solution(object):
     def connect(self, root):
@@ -16,14 +14,28 @@ class Solution(object):
         """
         if root == None:
             return
+        curHead, lastHead = None, root
+        pre = None
 
-        storemap = collections.deque()
-        storemap.append([root, 0])
-        while len(storemap) > 0:
-            curNode, level = storemap.popleft();
-            if len(storemap) > 0 and storemap[0][1] == level:
-                curNode.next = storemap[0]
-            if curNode.left != None:
-                storemap.append([curNode.left, level+1])
-            if curNode.right != None:
-                storemap.append([curNode.right, level+1])
+        while lastHead:
+            lastcur = lastHead
+            while lastcur:
+                if lastcur.left:
+                    if curHead == None:
+                        curHead = lastcur.left
+                        pre = curHead
+                    else:
+                        pre.next = lastcur.left
+                        pre = pre.next
+                if lastcur.right:
+                    if curHead == None:
+                        curHead = lastcur.right
+                        pre = curHead
+                    else:
+                        pre.next = lastcur.right
+                        pre = pre.next
+
+                lastcur = lastcur.next
+
+            lastHead = curHead
+            curHead = None

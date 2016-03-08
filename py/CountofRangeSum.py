@@ -6,7 +6,6 @@ class Solution(object):
         :type upper: int
         :rtype: int
         """
-
         tmpsum, ans = 0, 0
         for i in xrange(len(nums)):
             j = i
@@ -15,5 +14,6 @@ class Solution(object):
                 tmpsum += nums[j]
                 if tmpsum >= lower and tmpsum <= upper:
                     ans += 1
+                j += 1
 
-        return ans
+        return ans   
