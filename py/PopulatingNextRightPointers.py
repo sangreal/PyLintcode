@@ -17,7 +17,6 @@ class Solution(object):
 			return
 		curHead, lastHead = None, root
 		pre = None
-		lastcur = None
 
 		while lastHead:
 			lastcur = lastHead
@@ -27,14 +26,14 @@ class Solution(object):
 						curHead = lastcur.left
 						pre = curHead
 					else:
-						pre = lastcur.left
+						pre.next = lastcur.left
 						pre = pre.next
 				if lastcur.right:
 					if curHead == None:
 						curHead = lastcur.right
 						pre = curHead
 					else:
-						pre = lastcur.right
+						pre.next = lastcur.right
 						pre = pre.next
 
 				lastcur = lastcur.next

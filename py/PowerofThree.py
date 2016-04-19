@@ -4,8 +4,11 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
-        
-        while n%3 == 0 and n > 0:
+        if n == 0:
+        	return False
+        if n == 1:
+        	return True
+        while n%3 == 0:
         	n /=3
 
-        return n == 0
+        return n == 1

@@ -1,5 +1,4 @@
-import sys
-
+import sys 
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -8,28 +7,24 @@ class TreeNode(object):
         self.right = None
 
 class Solution(object):
-    maxvalue = -sys.maxint
-	def PathHelper(self, root):
-	    if root is None:
-        	return 0
-        cval = root.val
-        leftmax = self.PathHelper(root.left)
-        if leftmax > 0:
-        	cval += leftmax
+	def getSum(self, root):
+		if root is None:
+			return 0
 
-        rightmax = self.PathHelper(root.right)
-        if rightmax > 0:
-        	cval += rightmax
+		curstartval = root.val
+		lmax = self.getSum(root.left)
+		rmax = self.getSum(root.right)
+		if lmax > 0 : curstartval += lmax
+		if rmax > 0 : curstartval += rmax
+		Solution.maxvalue = max(Solution.maxvalue, curstartval)
 
-        maxvalue = max(maxvalue, cval)
+		return max(root.val, root.val+lmax, root.val+rmax)
 
-        return max(root.val, root.val+leftmax, root.val+rightmax)
-
-    def maxPathSum(self, root):
-        """
-        :type root: TreeNode
-        :rtype: int
-        """
-
-        connectMax = self.PathHelper(root)
-        return max(connectMax, maxvalue)
+	def maxPathSum(self, root):
+		"""
+		:type root: TreeNode
+		:rtype: int
+		"""
+		Solution.maxvalue = -sys.maxint
+		retMax = self.getSum(root)
+		return max(Solution.maxvalue, retMax)

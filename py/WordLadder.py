@@ -18,12 +18,13 @@ class Solution:
 			storeStr = word;
 			for ch in alphalist:
 				oldchar = storeStr[i]
-				storeStr[i] = ch;
 				if storeStr[i] == ch:
 					continue
-				elif storeStr == endWord or storeStr in wordList and storeStr not in visited:
+                storeStr[i] = ch
+                if storeStr == endWord or storeStr in wordList and storeStr not in visited:
 					retVec.append(storeStr)
 					visited.add(storeStr)
+                storeStr[i] = oldchar
 
 		return retVec
 		
