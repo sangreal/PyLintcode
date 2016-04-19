@@ -7,7 +7,7 @@ class Solution(object):
         elif board[i][j] == word[pos] and pos == len(word)-1:
             return True
 
-        tmp, board[i][j] = board[i][j], '.'
+        tmp, board[i][j] = board[i][j], :'.'
         ret1 = self.wordSearch(board, word, pos+1, i-1, j)
         if ret1 == True:
             return True

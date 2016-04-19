@@ -11,3 +11,4 @@ class Solution(object):
         	n >>= 1
         	p += 1
         return m << p
+

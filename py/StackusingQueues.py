@@ -37,7 +37,6 @@ class Stack(object):
                 self.storeQueue.append(self.popQueue.popleft())
         self.popQueue.popleft()
 
-     
         self.size -= 1
 
     def top(self):
@@ -46,9 +45,13 @@ class Stack(object):
         """
         if self.size == 0:
             return -1
-        else:
-           return self.popQueue[0]
 
+        if len(self.popQueue) == 0:
+            while len(self.storeQueue) > 0:
+                self.popQueue.append(self.storeQueue.popleft())
+            while len(self.popQueue) > 1:
+                self.storeQueue.append(self.popQueue.popleft())
+        return self.popQueue[0]
 
     def empty(self):
         """

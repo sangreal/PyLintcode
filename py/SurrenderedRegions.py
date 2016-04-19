@@ -41,6 +41,3 @@ class Solution(object):
 			for j in xrange(width):
 				if visited[i][j] == 0 and board[i][j] == 'O':
 					self.bfs(board, i, j, visited)
-
-
-        
