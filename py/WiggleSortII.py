@@ -8,4 +8,4 @@ class Solution(object):
         for i in xrange(1,len(nums), 2):
             nums[i] = store.pop()
         for j in xrange(0,len(nums),2):
-            nums[] = store.pop()
+            nums[j] = store.pop()

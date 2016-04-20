@@ -40,9 +40,4 @@ class Solution(object):
 				prev = p
 				p = p.right
 
-		tmpval = node1.val
-		node1.val = node2.val
-		node2.val = tmpval
-
-
-        
+		node1.val, node2.val = node2.val, node1.val
