@@ -47,7 +47,7 @@ class Codec:
             val = next(vals)
             if val == '#':
                 return None
-            curNode = TreeNode(int(val)
+            curNode = TreeNode(int(val))
             curNode.left = doit()
             curNode.right = doit()
             return curNode

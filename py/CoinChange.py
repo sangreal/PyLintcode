@@ -1,21 +1,25 @@
 class Solution(object):
-
-    def dfs(self, coins, amount, num):
-        if amount == 0:
-            self.minNum = min(self.minNum, num)
-            return
-        for x in coins:
-            if amount-x >= 0:
-                self.dfs(coins, amount-x, num+1)
-        return
-
     def coinChange(self, coins, amount):
-        """
-        :type coins: List[int]
-        :type amount: int
-        :rtype: int
-        """
-        self.minNum = sys.maxint
+		"""
+		:type coins: List[int]
+		:type amount: int
+		:rtype: int
+		"""
+		if amount == 0: return 0
 
-        self.dfs(coins, amount, 0)
-        return -1 if self.minNum == sys.maxint else self.minNum
+		dp = [-1 for i in xrange(amount+1)]
+		for i in coins:
+			if i <= amount:
+				dp[i] = 1
+
+		for i in xrange(1, amount):
+			if dp[i] == -1: continue
+			for c in coins:
+				nextpos = i+c
+				if nextpos <= amount:
+					if dp[nextpos] == -1: 
+						dp[nextpos] = dp[i]+1
+					else:
+						dp[nextpos] = min(dp[nextpos], dp[i]+1)
+		return dp[amount]
+

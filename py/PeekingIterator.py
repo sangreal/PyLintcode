@@ -1,5 +1,7 @@
 import copy
 
+# Below is the interface for Iterator, which is already defined for you.
+#
 class Iterator(object):
     def __init__(self, nums):
         """

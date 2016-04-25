@@ -1,4 +1,3 @@
-
 class Solution:
     # @param {int} n a positive integer
     # @param {int[]} primes the given prime list

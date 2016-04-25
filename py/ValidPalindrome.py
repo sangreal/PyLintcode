@@ -20,7 +20,7 @@ class Solution(object):
         		r -= 1
 
         	if l < r:
-        		if s[l].lower() is not s[r].lower():
+        		if s[l].lower() != s[r].lower():
         			return False
         		else:
         			l += 1
