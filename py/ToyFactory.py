@@ -21,13 +21,7 @@ class ToyFactory:
     # @param {string} shapeType a string
     # @return {Toy} Get object of the type
     def getToy(self, type):
-        retToy = None
-        # if type == 'dog':
-        #     retToy = Dog()
-        # elif type == 'cat':
-        #     retToy = Cat()
-        # return retToy
-        h = {
-            'dog': lambda retToy: retToy = Dog(),
-            'cat': lambda retToy: retToy = Cat(),
-        }[retToy](type)
+        return  {
+            'Dog': Dog(),
+            'Cat': Cat(),
+        }.get(type, None)
