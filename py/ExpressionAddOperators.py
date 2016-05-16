@@ -1,43 +1,30 @@
 class Solution(object):
-	def dfs(self, numstr, target, lastnum, curstr, retlist, strsum, pos):
-		if len(numstr) == pos and target == strsum:
-			retlist.append(curstr)
-			print "print "
-			return
+    def addOperators(self, num, target):
+        """
+        :type num: str
+        :type target: int
+        :rtype: List[str]
+        """
+        retlist = []
+        def dfs(path, pos, cursum, lastnum):
+            leng = len(num)
+            if pos == leng and cursum == target:
+                retlist.append(path)
 
-		if len(numstr) <= pos:
-			return
+            if pos >= leng:
+                return
 
-		print 'target is %d' %(target)
-		for i in xrange(pos, len(numstr)):
-			if i > pos and numstr[pos] == '0':
-				break
-			curnum = int(numstr[pos:i+1])
-			print "curnum : %d" %(curnum)
-			if pos == 0:
-				self.dfs(numstr, target, curnum, curstr + "" + numstr[pos:i+1], retlist, curnum, i+1)
-			else:
-				self.dfs(numstr, target, curnum, curstr + "+" + numstr[pos:i+1], retlist, strsum+curnum, i+1)
-				self.dfs(numstr, target, -curnum, curstr + "-" + numstr[pos:i+1], retlist, strsum-curnum, i+1)
-				self.dfs(numstr, target, lastnum*curnum, curstr + "*" + numstr[pos:i+1], retlist, strsum-lastnum+lastnum*curnum, i+1)
+            for i in xrange(pos, leng):
+                if i > pos and num[pos] == '0':
+                    break
 
+                curnum = int(num[pos:i+1])
+                if pos == 0:
+                    dfs(path + "" + str(curnum), i+1, curnum, curnum)
+                else:
+                    dfs(path + "+" + str(curnum), i+1, cursum+curnum, curnum)
+                    dfs(path + "-" + str(curnum), i+1, cursum-curnum, -curnum)
+                    dfs(path + "*" + str(curnum), i+1, cursum-lastnum+curnum*lastnum, curnum*lastnum)
 
-
-
-	def addOperators(self, num, target):
-		"""
-		:type num: str
-		:type target: int
-		:rtype: List[str]
-		"""
-		retlist = []
-		self.dfs(num, target, 0, "", retlist, 0, 0)
-		return retlist
-
-if __name__ == "__main__":
-	s = Solution()
-	inputstr = "105"
-	target = 5
-	retlist = []
-	retlist = s.addOperators(inputstr, target)
-	print 'return str %s len : %d' %("".join(retlist), len(retlist))
+        dfs("", 0, 0, 0)
+        return retlist
