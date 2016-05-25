@@ -6,21 +6,13 @@ class TreeNode(object):
 		self.right = None
 
 class Solution(object):
-	def buildRecursive(self, preorderStr, inorderStr, prestart, preend, instart, inend):
-		if prestart == preend or instart == inend:
+	def build(self, prestart, preend, instart,inend):
+		if prestart >= preend:
 			return None
-
-		rootVal = preorderStr[prestart]
-		rootNode = TreeNode(rootVal)
-		inRootPos = instart
-		while inorderStr[inRootPos] != rootVal:
-			inRootPos += 1
-
-		leftSize = inRootPos-instart
-
-		rootNode.left = self.buildRecursive(preorderStr, inorderStr, prestart+1, prestart+leftSize+1, instart, inRootPos)
-		rootNode.right = self.buildRecursive(preorderStr, inorderStr, prestart+leftSize+1, preend, inRootPos+1, inend)
-
+		root = TreeNode(self.preorder[prestart])
+		idx = self.inorder[instart:inend+1].index(root.val)
+		root.left = self.build(prestart+1, prestart+idx+1, instart, instart+idx)
+		root.right = self.build(prestart+idx+1, preend, instart+idx+1, inend)
 		return root
 
 
@@ -30,7 +22,8 @@ class Solution(object):
 		:type inorder: List[int]
 		:rtype: TreeNode
 		"""
-		if len(preorder) == 0 or len(inorder) == 0: return None
-		prestart, prend = 0, len(preorder)-1
-		instart, inend = 0, len(inorder)-1
-		return self.buildRecursive(preorder, inorder, prestart, prend, instart, inend)
+		if (len(preorder) == 0):
+			return None
+		self.preorder = preorder
+		self.inorder = inorder
+		return self.build(0, len(preorder), 0, len(inorder))

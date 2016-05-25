@@ -11,7 +11,7 @@ class Solution(object):
 		if node == None:
 			return ""
 
-		neiborset = collections.defaultdict(set)
+		neiborset = collections.defaultdict(int)
 		nodevec = collections.deque()
 		nodevec.append(node)
 
@@ -21,14 +21,14 @@ class Solution(object):
 			curnode = nodevec.popleft()
 			retStr += str(curnode.label)
 			retStr += ','
+			neiborset[curnode.label] += 1
 			for neib in curnode.neighbors:
 				nlabel = neib.label
-				if nlabel not in neiborset[curnode.label]:
-					neiborset[curnode.label].add(nlabel)
+				if nlabel not in neiborset:
 					retStr += str(nlabel)
 					retStr += ','
-				if curnode.label not in neiborset[nlabel]:
-					neiborset[nlabel].add(curnode.label)
+					nodevec.append(neib)
+
 			retStr = retStr[0:len(retStr)-1]
 			retStr += '#'
 		return retStr
@@ -49,7 +49,7 @@ class Solution(object):
 			for i in xrange(len(nodelist)):
 				nlabel = nodelist[i]
 				if nlabel not in nodemap:
-					newnode = UndirectedGraphNode(int(nlabel))
+					newnode = UndirectedGraphNode(nlabel)
 					nodemap[nlabel] = newnode
 
 				if i == 0:

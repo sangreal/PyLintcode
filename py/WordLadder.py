@@ -23,7 +23,8 @@ class Solution(object):
                     storeword = tword
             return retvec
 
-        curvec, nextvec = collections.deque(beginWord), collections.deque()
+        curvec, nextvec = collections.deque(list), collections.deque(list)
+        curvec.append(beginWord)
         level = 0
         found = False
         while len(curvec) > 0 and found == False:
@@ -67,7 +68,7 @@ class Solution:
                 storeStr[i] = oldchar
 
 		return retVec
-		
+
 	def ladderLength(self, beginWord, endWord, wordList):
 	    if len(wordList) == 0:
 	        return 0
