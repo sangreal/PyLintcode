@@ -6,18 +6,18 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        ret = ""
+        store = []
+        resultSet = set()
 
-        for x in xrange(0, len(set(s))):
-            top, idx = s[0], 0        	
-            counter = collections.Counter(s)
-        	for i in xrange(0, len(s)):
-        		if top > s[i]:
-        			top, idx = s[i], i
-        		if counter[s[i]] == 1:
-        			break
-        		counter[s[i]] -= 1
-        	ret += top
-        	s = s[i+1:].replace(top, '')
+        count = collections.Counter(s)
 
-        return ret
+        for n in s:
+            count[n] -= 1
+            if n in resultSet:
+                continue
+            while len(store) > 0 and store[-1] > n and count[store[-1]] > 0:
+                resultSet.remove(store.pop())
+            resultSet.add(n)
+            store.append(n)
+
+        return ''.join(store)
