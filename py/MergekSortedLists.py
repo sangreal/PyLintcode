@@ -35,7 +35,7 @@ class Solution(object):
         return retlist
 
 class Solution(object):
-        def mergeKLists(self, lists):
+    def mergeKLists(self, lists):
         """
         :type lists: List[ListNode]
         :rtype: ListNode
@@ -57,4 +57,4 @@ class Solution(object):
 
             if topnode.next:
                 heapq.heappush(heaplist, (topnode.next.val, topnode.next))
-        return heaplist
+        return head.next

@@ -23,7 +23,7 @@ class Solution(object):
                     storeword = tword
             return retvec
 
-        curvec, nextvec = collections.deque(list), collections.deque(list)
+        curvec, nextvec = collections.deque(), collections.deque()
         curvec.append(beginWord)
         level = 0
         found = False
