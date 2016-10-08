@@ -33,8 +33,8 @@ class Solution(object):
 					else:
 						numlist.append(curnum)
 			else:
-				curnum = int(s[prevpos:i])
 				if len(opslist) > 0 and (s[i] == ')' or s[i] in opsample):
+					curnum = int(s[prevpos:i])
 					ops = opslist.pop()
 					tmpnum = numlist.pop()
 					numlist.append(calcops(tmpnum, curnum))

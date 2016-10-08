@@ -27,7 +27,11 @@ class Solution(object):
 					vec.append(p)
 					p = p.right
 					break
-
+	def buildTree(self, nodelist):
+		if len(nodelist) == 0:
+			return
+		root = TreeNode(nodelist[0])
+		root.left = 
 
 	def upsideDownBinaryTree(self, root):
 		"""
