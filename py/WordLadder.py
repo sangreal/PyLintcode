@@ -52,7 +52,7 @@ class Solution:
 
 		alphalist = list(string.ascii_lowercase)
 
-		visited = Set([word]);
+		visited = set([word]);
 		retVec = []
 
 		for i in xrange(0, len(word)):
@@ -69,7 +69,7 @@ class Solution:
 
 		return retVec
 
-	def ladderLength(self, beginWord, endWord, wordList):
+    def ladderLength(self, beginWord, endWord, wordList):
 	    if len(wordList) == 0:
 	        return 0
         if beginWord == endWord:

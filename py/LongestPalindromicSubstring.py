@@ -55,3 +55,5 @@ class Solution2(object):
 			self.findmaxlen(s, li, ri)
 
 		return s[Solution2.maxl:Solution2.maxr+1]
+
+
