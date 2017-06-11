@@ -5,6 +5,7 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
+import sys
 class Solution(object):
     def getMinimumDifference(self, root):
         """
@@ -12,14 +13,13 @@ class Solution(object):
         :rtype: int
         """
         self.mindiff = sys.maxint
-        self.last = -sys.maxint
-        def calcDiff(root):
+        def calcDiff(root, parent):
             if root is None:
                 return
-            calcDiff(root.left)
-            self.mindiff = min(self.mindiff, root.val-self.last)
-            self.last = root.val
-            calcDiff(root.right)
+            self.calcDiff(root.left, root)
+            if parent is not None:
+                mindiff = min(mindiff, abs(parent.val-root.val))
+            self.calcDiff(root.right, root)
 
-        calcDiff(root)
-        return self.mindiff
+        calcDiff(root, None)
+        return mindiff

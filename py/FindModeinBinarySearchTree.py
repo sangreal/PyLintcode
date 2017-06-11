@@ -6,30 +6,31 @@ class TreeNode(object):
         self.right = None
 
 class Solution(object):
-    def modeHelper(self, root):
-        if root == None:
-            return -1, 0, 0
-        lmaxval, lmaxcnt, lrootcnt = self.modeHelper(root.left)
-        rmaxval, rmaxcnt, rrootcnt = self.modeHelper(root.right)
+    def modeHelper(self, root, maxvalcnt, maxval, preval, curvalcnt, retlist):
+        if root is None:
+            return
+        self.modeHelper(root.left, maxvalcnt, maxval, preval, curvalcnt, retlist)
+        curvalcnt += 1
 
-        rootcnt = 1
-        if lmaxval != -1 and lmaxval == root.val:
-            rootcnt += lmaxcnt
-        if rmaxval != -1 and rmaxval == root.val:
-            rootcnt += rmaxcnt
-        curmaxcnt = max(lmaxcnt, rmaxcnt, rootcnt)
-        curmaxval = root.val
-        if curmaxcnt != rootcnt:
-            if curmaxcnt == lmaxcnt:
-                curmaxval = lmaxval
-            else:
-                curmaxval = rmaxval
-        return curmaxval, curmaxcnt, rootcnt
+        if preval != root.val:
+            curvalcnt = 1
+            preval = root.val
+        if curvalcnt > maxvalcnt:
+            maxval = root.val
+            del retlist[:]
+            retlist.append(root.val)
+            maxvalcnt = curvalcnt
+        elif curvalcnt == maxvalcnt:
+            retlist.append(root.val)
+        self.modeHelper(root.right, maxvalcnt, maxval, preval, curvalcnt, retlist)
+        return
 
     def findMode(self, root):
         """
         :type root: TreeNode
         :rtype: List[int]
         """
-        retmaxval, retmaxcnt, rootcnt = self.modeHelper(root)
-        return retmaxval
+        maxvalcnt, maxval, preval, curvalcnt, retlist = 0, -1, -1, 0, []
+        self.modeHelper(root, maxvalcnt, maxval, preval, curvalcnt, retlist)
+        return retlist
+
